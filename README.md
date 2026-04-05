@@ -1,10 +1,14 @@
-# Netflix Content Analysis — Exploratory Data Analysis (EDA)
+# Netflix Content EDA — What should Netflix produce next?
 
-# Business Problem
+![Python](https://img.shields.io/badge/Python-3.10-blue) ![Pandas](https://img.shields.io/badge/Pandas-EDA-green) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-> **How can Netflix decide what type of content to produce — and where to grow next?**
+## What this project is about
 
-Netflix has a massive content library across 100+ countries. This project analyzes 8,807 titles to uncover patterns in content type, genre, ratings, and geography — and translates them into actionable business recommendations.
+I took a real Netflix dataset — 8,807 titles across 123 countries — cleaned the mess out of it, fixed a few bugs I stumbled into, and tried to answer one question:
+
+**What type of content should Netflix produce, and where should it grow next?**
+
+This is my first solo data project. I built it entirely in Python after transitioning from 3+ years in healthcare data analytics.
 
 ---
 
@@ -14,77 +18,76 @@ Netflix has a massive content library across 100+ countries. This project analyz
 |---|---|
 | Source | [Kaggle — Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows) |
 | Rows | 8,807 titles |
-| Columns | 12 attributes |
-| Period | 1925 – 2021 |
-
-**Columns:** `show_id`, `type`, `title`, `director`, `cast`, `country`, `date_added`, `release_year`, `rating`, `duration`, `listed_in`, `description`
+| Columns | 12 |
+| Period covered | 1925 – 2021 |
 
 ---
 
-## Project Structure
+## The part that took the longest — data cleaning
 
+Columns like `country`, `cast`, and `listed_in` stored multiple values in a single cell, comma-separated. For example, one title could show `"India, United States, United Kingdom"` in the country column.
+
+To handle this I used a 3-step process:
+
+```python
+# Step 1 — split the string into a list
+df['country'] = df['country'].str.split(',')
+
+# Step 2 — explode: each list value becomes its own row
+df = df.explode('country')
+
+# Step 3 — clean up extra spaces
+df['country'] = df['country'].str.strip()
 ```
-netflix-eda/
-│
-├── netflix_eda.ipynb        # Main analysis notebook
-├── netflix.csv              # Dataset
-└── README.md
+
+> **Important:** After exploding, the row count goes above 8,807. That's expected — each row now represents one country/genre *appearance*, not one unique title. I kept this in mind when reporting counts.
+
+---
+
+## A bug I found mid-analysis
+
+While plotting a boxplot of Rating vs Release Year, I noticed something weird on the x-axis — values like `"66 min"`, `"74 min"`, `"84 min"` showing up as ratings. Duration values had somehow ended up in the rating column.
+
+I fixed it by filtering to only valid rating categories:
+
+```python
+valid_ratings = ['TV-MA','TV-14','R','PG-13','PG','G','TV-Y','TV-Y7','TV-G','NR','NC-17']
+df_clean = df[df['rating'].isin(valid_ratings)]
 ```
 
----
-
-## Methodology
-
-### 1. Data Cleaning
-- Converted `date_added` to datetime and extracted year, month, day
-- Fixed **data quality bug**: duration values (e.g. "66 min") had leaked into the `rating` column — identified via boxplot, removed using `isin()` filter
-- Handled missing values: `director` (30% missing), `cast` and `country` (~9%) filled with `'Unknown'`
-- Converted `type` and `rating` to categorical dtype for efficiency
-
-### 2. Data Transformation
-- Columns like `country`, `cast`, and `listed_in` contained comma-separated multiple values
-- Applied `str.split()` → `explode()` → `str.strip()` to unnest them into individual rows
-- **Note:** After exploding, row counts are higher than 8,807 — each row represents one country/genre/cast appearance, not one unique title
-
-### 3. Analysis
-- **Univariate:** Histograms, KDE plots, countplots for release year, duration, ratings
-- **Bivariate:** Boxplots of rating vs release year, duration by content type
+Lesson I learned: always visualize before you analyze. Dirty data hides in places you don't expect.
 
 ---
 
-## Key Findings
+## What I found
 
-| # | Finding |
-|---|---|
-| 1 | Movies dominate Netflix (70%) vs TV Shows (30%) |
-| 2 | Most content was added between 2018–2020; slight decline after 2020 |
-| 3 | United States is the top content-producing country; India is #2 and growing |
-| 4 | TV-MA and TV-14 are the most common ratings — Netflix targets mature audiences |
-| 5 | Most movies run 80–120 minutes; most TV shows have only 1–2 seasons |
-| 6 | Drama and International Movies are the dominant genres globally |
-| 7 | July and December see the highest volume of content additions |
+- Movies make up 70% of Netflix content — TV Shows are only 30%, but they're growing faster post-2016
+- Most content on Netflix was added between 2018–2020, with a dip after 2020 (likely COVID impact on production)
+- The US is the #1 content-producing country. India is #2 — and the gap is closing
+- TV-MA and TV-14 dominate the ratings — Netflix is clearly targeting mature audiences
+- Drama and International Movies are the most common genres by far
+- July and December see the highest content additions — likely tied to subscriber demand peaks
 
 ---
 
-## Business Recommendations
+## Business recommendations
 
-1. **Invest in TV Shows** — TV Shows drive longer viewer engagement (multiple episodes/seasons). Post-2016 growth trend supports continued investment.
-2. **Expand Indian regional content** — India is the #2 content country. Investing in Tamil, Telugu, and Marathi originals could unlock a massive underserved audience.
-3. **Double down on Drama and Thriller** — Highest genre representation globally; strong cross-country appeal.
-4. **Target content releases in July and December** — Peak content addition months align with viewer demand cycles.
-5. **Diversify into family-friendly content** — TV-G and TV-Y content is underrepresented relative to audience size.
-6. **Mature content is core** — TV-MA dominates; premium adult drama is Netflix's strongest retention category.
+1. **Keep investing in TV Shows** — they drive longer watch time and bring viewers back across seasons
+2. **India is the biggest growth opportunity** — regional language content (Tamil, Telugu, Marathi) is underserved relative to the audience size
+3. **Drama and Thriller are safe bets** — highest engagement genres, consistent across countries
+4. **Time new releases for July and December** — that's when content addition peaks, suggesting those months drive results
+5. **Mature content is Netflix's core** — TV-MA dominates, doubling down on premium adult drama makes sense
 
 ---
 
-## Tools & Libraries
+## Tools used
 
 `Python` · `Pandas` · `NumPy` · `Matplotlib` · `Seaborn`
 
 ---
 
-## About Me
+## About me
 
-I'm a career transitioner from healthcare data (M.Pharm + 3.4 years at Cognizant & Indegene) into Data Analytics. This is my first solo end-to-end EDA project, built as part of Scaler's Data Science program.
+I spent 3.4 years working in healthcare data at Cognizant and Indegene. I always worked *with* data — but never truly analyzed it on my own terms. In May 2025 I left my job and joined Scaler's Data Science program full-time. This Netflix project is my first solo end-to-end EDA build.
 
 📧 [Your Email] · 💼 [Your LinkedIn] · 🐙 [Your GitHub]
