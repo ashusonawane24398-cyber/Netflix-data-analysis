@@ -101,7 +101,7 @@ This Netflix EDA is my first. Every bug I fixed taught me something new.
 
 📧 ashwinisonawane693@gmail.com · 
 💼 www.linkedin.com/in/ashwini-sonawane-3294aa196
-🐙 [Your GitHub]
+🐙 https://github.com/ashusonawane24398-cyber/Netflix-data-analysis
 
 
 
