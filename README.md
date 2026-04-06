@@ -63,7 +63,7 @@ df_clean = df[df['rating'].isin(valid_ratings)]
 
 Lesson learned: **always visualize before you analyze.** Dirty data hides in places you'd never expect.
 
-![Rating vs Release Year](images/rating_boxplot.png)
+![Rating vs Release Year](rating_boxplot.png)
 
 ---
 
@@ -76,7 +76,7 @@ Lesson learned: **always visualize before you analyze.** Dirty data hides in pla
 - Drama and International Movies are the most common genres globally
 - July and December see the highest content additions every year
 
-![Movie Duration Distribution](images/movie_duration.png)
+![Movie Duration Distribution](movie_duration.png)
 
 ---
 
