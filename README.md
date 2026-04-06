@@ -104,7 +104,7 @@ I spent 3.4 years working in healthcare data at Cognizant and Indegene — alway
 
 This Netflix EDA is my first. Every bug I fixed taught me something new.
 
-📧 ashwinisonawane693@gmail.com · 💼 [LinkedIn](http://www.linkedin.com/in/ashwini-sonawane-3294aa196) · 🐙 [GitHub](https://github.com/ashusonawane24398-cyber/Netflix-data-analysis)
+📧 ashwinisonawane693@gmail.com · 💼 [LinkedIn](http://www.linkedin.com/in/ashwini-sonawane-3294aa196) · 🐙 [GitHub]https://github.com/ashwinisonawane24/Netflix-data-analysis
 
 
 
