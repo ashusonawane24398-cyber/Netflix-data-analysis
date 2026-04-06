@@ -1,5 +1,6 @@
 # Netflix Content EDA - What should Netflix produce next?
 
+![Python](https://img.shields.io/badge/Python-3.10-blue) ![Pandas](https://img.shields.io/badge/Pandas-EDA-green) ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 ---
 
@@ -62,6 +63,8 @@ df_clean = df[df['rating'].isin(valid_ratings)]
 
 Lesson learned: **always visualize before you analyze.** Dirty data hides in places you'd never expect.
 
+![Rating vs Release Year](images/rating_boxplot.png)
+
 ---
 
 ## What I found
@@ -72,6 +75,8 @@ Lesson learned: **always visualize before you analyze.** Dirty data hides in pla
 - TV-MA and TV-14 are the top ratings — Netflix is clearly targeting mature audiences
 - Drama and International Movies are the most common genres globally
 - July and December see the highest content additions every year
+
+![Movie Duration Distribution](images/movie_duration.png)
 
 ---
 
@@ -99,9 +104,8 @@ I spent 3.4 years working in healthcare data at Cognizant and Indegene — alway
 
 This Netflix EDA is my first. Every bug I fixed taught me something new.
 
-📧 ashwinisonawane693@gmail.com · 
-💼 www.linkedin.com/in/ashwini-sonawane-3294aa196
-🐙 https://github.com/ashusonawane24398-cyber/Netflix-data-analysis
+📧 ashwinisonawane693@gmail.com · 💼 [LinkedIn](http://www.linkedin.com/in/ashwini-sonawane-3294aa196) · 🐙 [GitHub](https://github.com/ashusonawane24398-cyber/Netflix-data-analysis)
+
 
 
 
