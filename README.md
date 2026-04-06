@@ -99,5 +99,9 @@ I spent 3.4 years working in healthcare data at Cognizant and Indegene — alway
 
 This Netflix EDA is my first. Every bug I fixed taught me something new.
 
+📧 ashwinisonawane693@gmail.com · 
+💼 www.linkedin.com/in/ashwini-sonawane-3294aa196
+🐙 [Your GitHub]
+
 
 
